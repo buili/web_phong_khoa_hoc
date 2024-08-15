@@ -1,0 +1,28 @@
+﻿@model IEnumerable<QLPhongKH.Models.BaiViet>
+@{
+    //ViewData["Title"] = "Home Page";
+    // Layout = "~/Views/Shared/LayoutUser.cshtml";
+}
+
+
+<div class="mb4">
+    <div class="mb-5">
+        <h2 class="mb-4">@ViewBag.tenLoai</h2>
+        @foreach (var item in Model)
+        {
+            <a class="d-flex align-items-center text-decoration-none mb-4" href="~/BaiViet/ChiTiet?id=@item.MaBaiViet">
+                <img class="img-fluid rounded anhbe" src="~/assets/img/team-1.jpg" alt="">
+                <div class="pl-3">
+                    <h6 class="tieude">@item.TenBaiViet</h6>
+
+                </div>
+            </a>
+        }
+
+    </div>
+
+</div>
+
+
+
+

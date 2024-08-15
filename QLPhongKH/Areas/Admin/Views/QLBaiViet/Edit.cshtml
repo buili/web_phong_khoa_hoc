@@ -1,0 +1,87 @@
+﻿@model QLPhongKH.Models.BaiViet
+@{
+    Layout = "~/Areas/Admin/Views/Shared/Layout_admin.cshtml";
+
+    QLPhongKH.Models.KhContext db = new QLPhongKH.Models.KhContext();
+}
+
+<div class="col-md-12">
+    <form asp-action="" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="from-horizontal">
+
+            <div class="form-group">
+              
+                <div class="col-md-10">
+                    <input type="hidden" value="@Model.MaBaiViet" name="MaBaiViet" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-lable col-md-2">Tên Bài Viết</label>
+                <div class="col-md-10">
+                    <input type="text" value="@Model.TenBaiViet" name="TenBaiViet" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-lable col-md-2">Loại bài viết</label>
+                <div class="col-md-10">
+                    <select name="LoaiBaiViet" class="form-control">
+                        @foreach (var item in db.LoaiBaiViets.ToList())
+                        {
+                            
+                            <option value="@item.MaLoai" selected="@(item.MaLoai == Model.LoaiBaiViet)">@item.TenLoai</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-lable col-md-2">Tóm Tắt</label>
+                <div class="col-md-10">
+                    <input type="text" value="@Model.TomTat" name="TomTat" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-lable col-md-2">Ngày Đăng</label>
+                <div class="col-md-10">
+                    <input type="date" value="@Model.NgayDang?.ToString("yyyy-MM-dd")" name="NgayDang" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-lable col-md-2">Tác Giả</label>
+                <div class="col-md-10">
+                    <input type="text" value="@Model.TacGia" name="TacGia" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-lable col-md-2">Nội Dung</label>
+                <div class="col-md-10">
+                    <textarea  class="form-control"  name="NoiDung" id="inputNoiDung">@Model.NoiDung</textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-lable col-md-2">Hình ảnh</label>
+                <div class="col-md-10">
+                    <input type="file" value="@Model.HinhAnh" name="HinhAnh" class="form-control" />
+                   
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-success btn-sm">Lưu</button>
+                </div>
+            </div>
+
+    </form>
+</div>
+@section DoanJS {
+    <script>
+        CKEDITOR.replace('inputNoiDung')
+        function BrowseServer() {
+            var finder = new CKFinder();
+
+            finder.popup();
+        }
+    </script>
+}

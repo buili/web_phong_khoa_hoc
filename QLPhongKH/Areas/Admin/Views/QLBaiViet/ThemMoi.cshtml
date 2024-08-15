@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/Layout_admin.cshtml";
+
+    QLPhongKH.Models.KhContext db = new QLPhongKH.Models.KhContext();
+}
+
+<div class="col-md-12">
+    <form asp-action="ThemMoi" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="from-horizontal">
+
+
+            <div class="form-group">
+                <label class="control-lable col-md-2">Tên Bài Viết</label>
+                <div class="col-md-10">
+                    <input type="text" value="" name="TenBaiViet" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-lable col-md-2">Loại bài viết</label>
+                <div class="col-md-10">
+                    <select name="LoaiBaiViet" class="form-control">
+                        @{
+                         var lst =    db.LoaiBaiViets.Where(m => m.ParentId != null &&
+                            !db.LoaiBaiViets.Where(n => n.ParentId != null).Select(n => n.MaLoai)
+                            .Contains((int)m.ParentId)).ToList();
+                        foreach (var item in lst)
+                        {
+                            <option value="@item.MaLoai">@item.TenLoai</option>
+                        }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-lable col-md-2">Tóm Tắt</label>
+                <div class="col-md-10">
+                    <input type="text" value="" name="TomTat" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-lable col-md-2">Ngày Đăng</label>
+                <div class="col-md-10">
+                    <input type="date" value="" name="NgayDang" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-lable col-md-2">Tác Giả</label>
+                <div class="col-md-10">
+                    <input type="text" value="" name="TacGia" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-lable col-md-2">Nội Dung</label>
+                <div class="col-md-10">
+                    <textarea class="form-control" name="NoiDung" id="inputNoiDung"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-lable col-md-2">Hình ảnh</label>
+                <div class="col-md-10">
+                    <input type="file"  name="HinhAnh" class="form-control" />
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-success btn-sm">Lưu</button>
+                </div>
+            </div>
+
+</form>
+</div>
+
+@section DoanJS {
+    <script>
+        CKEDITOR.replace('inputNoiDung')
+        function BrowseServer() {
+            var finder = new CKFinder();
+
+            finder.popup();
+        }
+    </script>
+}

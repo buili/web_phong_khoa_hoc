@@ -1,0 +1,66 @@
+﻿@model IEnumerable<QLPhongKH.Models.LoaiBaiViet>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/Layout_admin.cshtml";
+    QLPhongKH.Models.KhContext db = new QLPhongKH.Models.KhContext();
+    int stt = 0;
+}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        width: 150px;
+        background-color: #f2f2f2;
+        text-align: center;
+    }
+
+
+    img {
+        max-width: 100px;
+        height: auto;
+    }
+
+    .table a {
+        text-align: center;
+    }
+
+    .one1 {
+        background-color: aqua;
+        border: 5px solid #00fff2;
+        border-radius: 56px;
+    }
+</style>
+<a href="~/Admin/QLLoaiBaiViet/ThemMoi">Thêm Mới</a>
+<h1>Quản lý loại bài viết</h1>
+<table>
+
+    <tr>
+        <th class="th_stt">STT</th>
+        <th>Tên Loại Bài Viết</th>
+        <th>#</th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        stt++;
+        <tr>
+            <td>@stt</td>
+            <td>@item.TenLoai</td>
+            <td>
+                <a class="one1" href="~/Admin/QLLoaiBaiViet/Edit/@item.MaLoai">Edit</a> |
+                <a class="one1" href="~/Admin/QLLoaiBaiViet/Delete/@item.MaLoai">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>

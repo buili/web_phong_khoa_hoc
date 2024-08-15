@@ -1,0 +1,153 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/LayoutUser.cshtml";
+}
+<style>
+    .container-fluid.px-0.py-5 {
+        max-width: 80%;
+        margin: 0 auto;
+        /* Để căn giữa nếu phần tử không chiếm toàn bộ chiều rộng */
+    }
+
+    .noidung {
+        max-width: 100%;
+        padding-bottom: 15px;
+    }
+
+        .noidung img {
+            max-width: 100%;
+            width: 290px;
+            height: 180px;
+        }
+
+    /* .cot1,
+                            .cot2 {
+                            border: 1px solid red;
+                            } */
+
+    .tieude {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        /* Số dòng hiển thị */
+        -webkit-box-orient: vertical;
+    }
+
+    .tieude1 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        /* Số dòng hiển thị */
+        -webkit-box-orient: vertical;
+    }
+
+    .tomtat {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        /* Số dòng hiển thị */
+        -webkit-box-orient: vertical;
+    }
+
+    .anhbe {
+        width: 80px;
+        height: 80px;
+    }
+
+
+    .pagination2 {
+        display: inline-block;
+    }
+
+        .pagination2 a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+        }
+
+            .pagination2 a.active {
+                background-color: #4CAF50;
+                color: white;
+                border: 1px solid #4CAF50;
+            }
+
+            .pagination2 a:hover:not(.active) {
+                background-color: #ddd;
+            }
+
+</style>
+@section header {
+    <div class="jumbotron jumbotron-fluid position-relative overlay-bottom" style="margin-bottom: 90px;">
+        <div class="container text-center my-5 py-5">
+
+            <h1 class="text-white mt-4 mb-4">Tìm Kiếm</h1>
+            <div class="d-inline-flex text-white mb-5">
+                <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">Tìm Kiếm</p>
+            </div>
+            <div class="mx-auto mb-5" style="width: 100%; max-width: 600px;">
+                <form method="get" action="~/TimKiem/Index">
+                    <div class="input-group">
+                        <input type="text" name="timkiem" value="@ViewBag.timkiem" class="form-control border-light" style="padding: 30px 25px;" placeholder="Keyword" required>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-secondary px-4 px-lg-5">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+<div class="container-fluid px-0 py-5">
+    <div class="row mx-0 justify-content-center pt-5">
+        <div class="col-lg-9 mt-5 mt-lg-0 cot1">
+            @{
+                if (ViewBag.sl < 1)
+                {
+                    <h1>Không tìm thấy bài viết</h1>
+                }
+                else
+                {
+
+                    foreach (var item in Model)
+                    {
+
+                        <div class="row noidung">
+                            <div class="col-md-4 cot2">
+                                <a href="~/BaiViet/ChiTiet?id=@item.MaBaiViet">
+                                    <img class="img-fluid" src="~/assets/img/team-1.jpg" alt="Lỗi">
+                                </a>
+                            </div>
+                            <div class="col-md-8 cot2">
+
+                                <div class="noidung">
+                                    <a class="text-decoration-none  tieude1" href="~/BaiViet/ChiTiet?id=@item.MaBaiViet">
+                                        <h6>@item.TenBaiViet</h6>
+                                    </a>
+                                    <p>@item.NgayDang</p>
+                                    <p class="tomtat">
+                                        @item.TomTat
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+            }
+        </div>
+        <div class="col-lg-3 mt-5 mt-lg-0">
+            @await Component.InvokeAsync("chung", new { maloaibai = 4, sl = 4 })
+            @await Component.InvokeAsync("chung", new { maloaibai = 5, sl = 4 })
+        </div>
+    </div>
+
+</div>

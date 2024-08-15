@@ -1,0 +1,48 @@
+﻿@model QLPhongKH.Models.LoaiBaiViet;
+
+@{
+    QLPhongKH.Models.KhContext db = new QLPhongKH.Models.KhContext();
+}
+<div class="jumbotron jumbotron-fluid position-relative overlay-bottom" style="margin-bottom: 90px;">
+    <div class="container text-center my-5 py-5">
+        
+        <h1 class="text-white mt-4 mb-4">
+            @{
+                if (ViewBag.MaLoai != 0)
+                {
+                    @Model.TenLoai
+                }
+                else
+                {
+                    @:Home
+                }
+            }
+        </h1>
+        <div class="d-inline-flex text-white mb-5">
+            <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+            <i class="fa fa-angle-double-right pt-1 px-3"></i>
+            <p class="m-0 text-uppercase">
+                @{
+                    if (ViewBag.MaLoai != 0)
+                    {
+                        @Model.TenLoai
+                    }
+                    else
+                    {
+                        @:Home
+                    }
+                }
+            </p>
+        </div>
+        <div class="mx-auto mb-5" style="width: 100%; max-width: 600px;">
+            <form method="get" action="~/TimKiem/Index">
+                <div class="input-group">
+                    <input type="text" name="timkiem" value="@ViewBag.timkiem" class="form-control border-light" style="padding: 30px 25px;" placeholder="Keyword" required>
+                    <div class="input-group-append">
+                        <button type="submit"  class="btn btn-secondary px-4 px-lg-5">Tìm kiếm</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

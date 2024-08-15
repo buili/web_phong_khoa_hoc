@@ -1,0 +1,16 @@
+﻿@model IEnumerable<QLPhongKH.Models.LoaiBaiViet>
+@if (ViewBag.Count > 0)
+{
+   
+        <div class="dropdown-menu m-0">
+        @foreach (var item in Model)
+        {
+
+            <a href="~/BaiViet/Index?maloaibai=@item.MaLoai" class="dropdown-item">@item.TenLoai</a>
+            ViewBag.MaLoaiMenu = @item.MaLoai;
+        } 
+        </div>
+    
+}
+
+

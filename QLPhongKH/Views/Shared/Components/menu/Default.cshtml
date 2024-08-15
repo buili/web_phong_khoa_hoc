@@ -1,0 +1,87 @@
+﻿@model IEnumerable<QLPhongKH.Models.LoaiBaiViet>
+@{
+    QLPhongKH.Models.KhContext db = new QLPhongKH.Models.KhContext();
+}
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+        <a href="~/Home" class="navbar-brand ml-lg-3">
+            <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+            <div class="navbar-nav mx-auto py-0">
+                <a href="~/Home" class="nav-item nav-link active">Home</a>
+                <a href="~/GioiThieu/Index" class="nav-item nav-link">Giới Thiệu</a>
+                @foreach (var item in Model)
+                {
+                    var LoaiBai = db.LoaiBaiViets.Where(m => m.ParentId == item.MaLoai).ToList();
+                    int dem = LoaiBai.Count();
+                    if (dem < 1)
+                    {
+                    }
+                    else
+                    {
+                        <div class="nav-item dropdown">
+                            <a href="~/GioiThieu/Index" class="nav-link dropdown-toggle" data-toggle="dropdown">@item.TenLoai</a>
+                            @await Component.InvokeAsync("menu2", new { parentID = item.MaLoai })
+                        </div>
+                    }
+                }
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        <i class='bx bx-user'></i>
+                        @{
+                            var userName = Context.Session.GetString("user");
+                        }@userName
+                        </a>
+                    <div class="dropdown-menu m-0">
+                        <a href="~/Home/DangNhap" class="dropdown-item">Đăng Nhập</a>
+                        <a href="~/Home/DangXuat" class="dropdown-item">Đăng Xuất</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+@* <div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+        <a href="~/Home" class="navbar-brand ml-lg-3">
+            <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+            <div class="navbar-nav mx-auto py-0">
+                <a href="~/Home" class="nav-item nav-link active">Home</a>
+                <a href="~/GioiThieu/Index" class="nav-item nav-link">Giới Thiệu</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">TinTức</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="~/BaiViet/Index?maloaibai=1" class="dropdown-item">Tin Tức</a>
+                        <a href="~/BaiViet/Index?maloaibai=2" class="dropdown-item">Thông Báo</a>
+
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Nghiên Cứu Khoa Học</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="~/BaiViet/Index?maloaibai=3" class="dropdown-item">Giải thưởng nghiên cứu khoa học</a>
+                        <a href="~/BaiViet/Index?maloaibai=4" class="dropdown-item">Chương trình, đề tài, dự án</a>
+
+                    </div>
+                </div>
+
+                <a href="~/LienLac/Index" class="nav-item nav-link">Liên Lạc</a>
+                <a href="~/Home/DangKy" class="nav-link">Đăng Ký</a>
+                <a href="~/Home/DangNhap" class="nav-link">Đăng Nhập</a>
+                <a href="~/Home/DangXuat" class="nav-link">Đăng Xuất</a>
+
+            </div>
+            <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a>
+        </div>
+    </nav>
+</div> *@

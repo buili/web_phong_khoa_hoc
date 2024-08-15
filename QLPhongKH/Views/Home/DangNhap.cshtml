@@ -1,0 +1,175 @@
+﻿@model QLPhongKH.Models.TaiKhoan
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* font-family: 'Courier New', Courier, monospace; */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 99vh;
+            background: url(https://th.bing.com/th/id/R.952ca04282000fd0d68d16236b6362d0?rik=j9wLAHPWOHFEzg&pid=ImgRaw&r=0) no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .login {
+            width: 420px;
+            padding: 30px 40px;
+            background: transparent;
+            border: 2px solid rgba(233,233, 233,-2);
+            backdrop-filter: blur(5px);
+            box-shadow: 0px 0px 10px 1px;
+            color: white;
+            border-radius: 20px;
+        }
+
+            .login .h1 {
+                font-size: 50px;
+                text-align: center;
+            }
+
+        h1 {
+            text-align: center;
+        }
+
+        a {
+            color: rgb(255, 255, 255);
+        }
+
+        .login .input-box {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            margin: 30px 0px;
+        }
+
+        .login input {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            border: 2px solid rgba(233,233, 233, 2);
+            border-radius: 40px;
+            padding: 20px 40px 20px 20px;
+            color: white;
+        }
+
+        .input-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            font-size: 20px;
+            transform: translateY(-50%);
+        }
+
+        .login .mk {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin: -15px 0 15px;
+            padding: 0px 20px;
+            color: aliceblue;
+        }
+
+
+        .login .one {
+            width: 100%;
+            height: 30px;
+            background: #e2e2e2;
+            border: none;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0,0, -1);
+            color: #333;
+            font-weight: 600;
+        }
+
+        .amin {
+            display: flex;
+            align-items: center;
+            justify-self: auto;
+            gap: .5rem;
+            margin: 1rem;
+        }
+
+            .amin label {
+                display: inline-block;
+                /* margin-top: -3px ; */
+                margin: 0px 20px;
+                font-weight: 1000;
+            }
+
+        input[type="radio"] {
+            display: flex;
+            position: relative;
+            margin: 0px -10px;
+            right: -30px;
+            accent-color: red;
+        }
+
+        .login {
+            /* your existing styles */
+            font-family: 'Roboto', sans-serif; /* Or any other imported font */
+        }
+
+            .login .form-group p {
+                font-family: 'Roboto', sans-serif; /* Or any other imported font */
+            }
+
+        .tbloi {
+            font-weight: bold;
+            padding-top: 15px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <form action="" method="post">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Email" name="Email" value="@TempData["email"]" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="password" name="Password" value="@TempData["pass"]" required>
+                <i class='bx bx-lock-alt'></i>
+            </div>
+            <div class="mk">
+                <a href="~/Home/DangKy">Đăng Kí</a>
+                <a href="#">Quên mật khẩu</a>
+            </div>
+            <div class="amin">
+                <input type="radio" id="Admin" name="loai" value="admin">
+                <label for="Admin">Admin</label>
+                <input type="radio" id="khachhang" name="loai" value="user">
+                <label for="khachhang">User</label>
+            </div>
+
+            <button type="submit" class="one">Đăng Nhập</button>
+            <div class="form-group">
+                <p class="tbloi">
+                    @TempData["error"]
+                </p>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

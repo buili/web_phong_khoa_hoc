@@ -1,0 +1,28 @@
+﻿@model IEnumerable<QLPhongKH.Models.BaiViet>
+<div class="row mx-0 justify-content-center pt-5">
+    <div class="col-lg-9">
+        <div class="section-title position-relative mb-5">
+            <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">@ViewBag.tenLoai</h6>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 ">
+                        <div class="noidung">
+                            <a href="~/BaiViet/ChiTiet?id=@item.MaBaiViet">
+                                <img class="img-fluid" src="~/assets/img/team-1.jpg" alt="Lỗi">
+                            </a>
+                            <h6 class="boduoi">
+                                <a>@item.TenBaiViet</a>
+                            </h6>
+                           <p>@item.TomTat</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 mt-5 mt-lg-0">
+        @*  @await Component.InvokeAsync("dong1_1") *@
+        @await Component.InvokeAsync("dong1_1", new { type = 5, sl = 3 })
+    </div>
+</div>

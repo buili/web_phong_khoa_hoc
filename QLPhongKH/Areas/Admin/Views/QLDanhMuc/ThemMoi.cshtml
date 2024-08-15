@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/Layout_admin.cshtml";
+
+    QLPhongKH.Models.KhContext db = new QLPhongKH.Models.KhContext();
+}
+<div class="col-md-12">
+    <form asp-action="ThemMoi" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="from-horizontal">
+            <div class="form-group">
+                <label class="control-lable col-md-2">Tên Danh Mục</label>
+                <div class="col-md-10">
+                    <input type="text" value="" name="TenLoai" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-success btn-sm">Lưu</button>
+            </div>
+        </div>
+    </form>
+</div>

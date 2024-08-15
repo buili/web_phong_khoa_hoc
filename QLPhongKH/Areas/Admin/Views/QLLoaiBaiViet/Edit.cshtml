@@ -1,0 +1,40 @@
+﻿@model QLPhongKH.Models.LoaiBaiViet
+@{
+    Layout = "~/Areas/Admin/Views/Shared/Layout_admin.cshtml";
+
+    QLPhongKH.Models.KhContext db = new QLPhongKH.Models.KhContext();
+}
+<div class="col-md-12">
+    <form asp-action="" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+
+            <div class="col-md-10">
+                <input type="hidden" value="@Model.MaLoai" name="MaLoai" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-lable col-md-2">Tên Bài Viết</label>
+            <div class="col-md-10">
+                <input type="text" value="@Model.TenLoai" name="TenLoai" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-lable col-md-2">Danh Mục</label>
+            <div class="col-md-10">
+                <select name="ParentId" class="form-control">
+                    @foreach (var item in db.LoaiBaiViets.Where(m => m.ParentId == null).ToList())
+                    {
+                        <option value="@item.MaLoai">@item.TenLoai</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-success btn-sm">Lưu</button>
+            </div>
+        </div>
+    </form>
+</div>

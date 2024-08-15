@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "~/Views/Shared/LayoutUser.cshtml";
+}
+<style>
+    .gioithieu {
+        margin: 0;
+    }
+
+        .gioithieu .gioithieu1 {
+            margin: auto;
+            padding: 20px;
+            text-align: start;
+            transform: translate(0,-50%);
+        }
+
+    .nd {
+        display: block;
+        line-height: 30px;
+        text-align: none;
+        padding: 50px;
+        text-indent: 30px;
+        margin: 10px;
+        word-spacing: 6px;
+        word-wrap: break-word;
+        font-size: 20px;
+        transform: translate(0,-10%);
+    }
+</style>
+@section header {
+    <div class="jumbotron jumbotron-fluid position-relative overlay-bottom" style="margin-bottom: 90px;">
+        <div class="container text-center my-5 py-5">
+
+            <h1 class="text-white mt-4 mb-4">Giới Thiệu</h1>
+            <div class="d-inline-flex text-white mb-5">
+                <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">Giới Thiệu</p>
+            </div>
+            <div class="mx-auto mb-5" style="width: 100%; max-width: 600px;">
+                <form method="get" action="~/TimKiem/Index">
+                    <div class="input-group">
+                        <input type="text" name="timkiem" value="@ViewBag.timkiem" class="form-control border-light" style="padding: 30px 25px;" placeholder="Keyword" required>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-secondary px-4 px-lg-5">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+}
+<div class="gioithieu">
+    <h1 class="gioithieu1">Giới Thiệu</h1>
+    <div class="nd">
+        <p>
+            Phòng thí nghiệm là một cơ sở được thiết kế và xây dựng để thực hiện các thí nghiệm, thử nghiệm, và xét nghiệm trong các lĩnh vực khoa học. Các phòng thí nghiệm phục vụ cho mục đích nghiên cứu, phân tích, và đánh giá. Chúng có thể chứa các thiết bị và hóa chất phục vụ cho việc nghiên cứu vật lý, hóa học, sinh học, và nhiều lĩnh vực khác1. Nếu bạn quan tâm đến các thí nghiệm khoa học thú vị, bạn có thể tham khảo danh sách 100 thí nghiệm vui dành cho trẻ em 2. Ngoài ra, dự án PhET Interactive Simulations tại Đại học Colorado Boulder cung cấp các mô phỏng trực tuyến miễn phí về vật lý, hoá học, sinh học và nhiều lĩnh vực khác3.
+            Tìm hiểu thêm
+            1
+            vi.wikipedia.org
+            2
+            ideashop.vn
+            3
+            phet.colorado.edu
+            4
+            lawnet.vn
+            5
+            labmanager.com
+            6
+            pubs.acs.org
+            7
+            gettyimages.com
+            +5 xem thêm
+            Cuộc trò chuyện
+            Bổ sung
+       Response stopped
+            Chủ đề mới
+            Hỏi tôi bất cứ điều gì...
+        </p>
+    </div>
+
+</div>

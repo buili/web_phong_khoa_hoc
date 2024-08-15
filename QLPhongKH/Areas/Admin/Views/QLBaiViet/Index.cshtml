@@ -1,0 +1,118 @@
+﻿@* @model IEnumerable<QLPhongKH.Models.BaiViet> *@
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<QLPhongKH.Models.BaiViet>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/Layout_admin.cshtml";
+    QLPhongKH.Models.KhContext db = new QLPhongKH.Models.KhContext();
+    //int stt = 0;
+    int stt = (Model.PageNumber - 1) * Model.PageSize;
+}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        width: 150px;
+        background-color: #f2f2f2;
+        text-align: center;
+    }
+    .th_tomtat{
+        width: 400px;
+    }
+    .th_stt{
+        width: 50px;
+    }
+    img {
+        max-width: 100px;
+        height: auto;
+    }
+
+    .table a {
+        text-align: center;
+    }
+
+    .one1 {
+        background-color: aqua;
+        border: 5px solid #00fff2;
+        border-radius: 56px;
+    }
+
+
+    .pagination2 {
+        display: inline-block;
+    }
+
+        .pagination2 a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+        }
+
+            .pagination2 a.active {
+                background-color: #4CAF50;
+                color: white;
+                border: 1px solid #4CAF50;
+            }
+
+            .pagination2 a:hover:not(.active) {
+                background-color: #ddd;
+            }
+</style>
+
+<a href="~/Admin/QLBaiViet/ThemMoi">Thêm Mới</a>
+<table >
+
+    <tr>
+        <th class="th_stt">STT</th>
+        <th>Tên Bài Viết</th>
+        <th>Hình ảnh</th>
+        <th> Tác Giả </th>
+        <th class="th_tomtat">Tóm tắt</th>
+        <th>Loại Bài Viết</th>
+        <th>Ngày đăng</th>
+        <th>#</th>
+
+    </tr>
+    
+     @foreach (var item in Model)
+     {
+
+        stt++;
+        <tr>
+            <td>@stt</td>
+            <td>@item.TenBaiViet</td>
+            <td><img class="img-fluid" src="@item.HinhAnh" alt="Lỗi"></td>
+            <td>@item.TacGia</td>
+            <td>@item.TomTat</td>
+            <td> @{
+                var loai = db.LoaiBaiViets.Find(item.LoaiBaiViet);
+                            if (loai != null)
+                            {
+                                <span>@loai.TenLoai</span>
+                            }
+                            }
+            </td>
+            <td> @string.Format("{0:dd-MM-yyyy}", item.NgayDang)</td>
+            <td>
+                <a class="one1" href="~/Admin/QLBaiViet/Edit/@item.MaBaiViet">Edit</a> |
+                <a class="one1" href="">Delete</a>
+            </td>
+        </tr>
+            }
+
+</table>
+
+<div class="pagination2">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page}))
+</div>
